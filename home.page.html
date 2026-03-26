@@ -1,0 +1,31 @@
+<ion-content [fullscreen]="true" class="dark-bg">
+  <div class="jarvis-interface">
+    
+    <div class="header-overlay">
+      <div class="status">SISTEMA ONLINE // NÚCLEO ACTIVO</div>
+      <h1 class="title">J.A.R.V.I.S.</h1>
+      <p>Bienvenido de vuelta, Sr. Millar</p>
+    </div>
+
+    <div class="brain-container" (click)="activarEscucha()">
+      <div class="glow"></div>
+      
+      <div class="ring r1"></div>
+      <div class="ring r2"></div>
+      <div class="ring r3"></div>
+      
+      <div class="brain-core" [class.active]="estaEscuchando">
+        <ion-icon [name]="estaEscuchando ? 'mic' : 'mic-outline'"></ion-icon>
+      </div>
+    </div>
+
+    <div class="footer-overlay">
+      <div class="telemetry">
+        <span>MEMORIA: {{ capacidadMemoria }}%</span> | 
+        <span>LATENCIA: 24ms</span>
+      </div>
+      <p class="ia-response">{{ ultimaRespuestaIA }}</p>
+    </div>
+
+  </div>
+</ion-content>
