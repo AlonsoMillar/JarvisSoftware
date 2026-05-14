@@ -1,0 +1,65 @@
+// 1. EL CONTENEDOR PRINCIPAL
+.main-wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  background: #050a12; 
+}
+
+// 2. EL ÁREA DE LAS PÁGINAS (HOME/LOGS)
+.content-area {
+  flex: 1; 
+  overflow-y: hidden; // Ionic ya maneja el scroll internamente en ion-content
+  position: relative;
+}
+
+// 3. EL FOOTER DE IONIC
+ion-footer {
+  background: transparent;
+  height: 70px; 
+}
+
+// 4. LA BARRA DE NAVEGACIÓN NEÓN
+.jarvis-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background: rgba(10, 14, 23, 0.85); 
+  backdrop-filter: blur(15px); 
+  border-top: 1px solid rgba(0, 242, 254, 0.3); 
+  padding: 10px 0;
+  height: 100%; // Toma la altura del ion-footer
+  box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.5);
+
+  .nav-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.5);
+    transition: all 0.3s ease;
+    cursor: pointer;
+
+    ion-icon {
+      font-size: 1.6rem;
+      margin-bottom: 4px;
+    }
+
+    span {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 0.6rem;
+      letter-spacing: 2px;
+    }
+
+    &.active-link {
+      color: #00f2fe;
+      filter: drop-shadow(0 0 8px #00f2fe);
+      transform: translateY(-3px);
+    }
+
+    &.disabled {
+      opacity: 0.2;
+      cursor: not-allowed;
+    }
+  }
+}

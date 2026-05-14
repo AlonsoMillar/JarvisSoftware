@@ -1,0 +1,177 @@
+// J.A.R.V.I.S. MARK V - CORE INTERFACE
+$jarvis-cian: #00f2fe;
+$jarvis-cian-dark: #4facfe;
+$bg-dark: #050a12; 
+$glass-effect: rgba(255, 255, 255, 0.05);
+
+.dark-bg {
+  --background: #{$bg-dark};
+  --color: white;
+  font-family: 'Orbitron', sans-serif;
+  background: radial-gradient(circle at center, #0a1624 0%, $bg-dark 100%);
+}
+
+.jarvis-interface {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  align-items: center;
+  padding: 40px 20px;
+  overflow: hidden;
+}
+
+// 1. HUD SUPERIOR 
+.header-overlay {
+  text-align: center;
+  width: 100%;
+  z-index: 20;
+  padding-top: 5vh; 
+  
+  .status {
+    color: $jarvis-cian;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+    animation: blink 2s infinite; 
+  }
+  
+  // EL TÍTULO: Tamaño controlado + Brillo holográfico
+  h1.title {
+    font-size: 2.2rem; 
+    font-weight: 900;
+    letter-spacing: 8px;
+    color: #ffffff;
+    margin: 10px 0;
+    text-align: center;
+    text-shadow: 
+      0 0 10px rgba($jarvis-cian, 0.9), 
+      0 0 20px rgba($jarvis-cian, 0.6), 
+      0 0 40px rgba($jarvis-cian, 0.3);
+  }
+}
+
+// 2. EL REACTOR ARC (Ajustado para móvil)
+.brain-container {
+  position: relative;
+  width: 280px; // Tamaño ajustado para coexistir con la barra
+  height: 280px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  margin: 0 auto;
+  animation: floating 5s ease-in-out infinite;
+
+  .brain-core {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    background: radial-gradient(circle, #fff 0%, $jarvis-cian 40%, darken($jarvis-cian-dark, 20%) 100%);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 
+      0 0 50px $jarvis-cian, 
+      inset 0 0 20px rgba(white, 0.8),
+      0 0 100px rgba($jarvis-cian, 0.2);
+    z-index: 10;
+    border: 3px solid rgba(white, 0.3);
+    
+    ion-icon {
+      font-size: 2.5rem;
+      color: $bg-dark;
+      filter: drop-shadow(0 0 5px white);
+    }
+    
+    &.active {
+      animation: coreSpasm 0.3s infinite alternate; 
+    }
+  }
+
+  .ring {
+    position: absolute;
+    border-radius: 50%;
+    border: 2px solid rgba($jarvis-cian, 0.15);
+    background: transparent;
+
+    &::after { 
+      content: '';
+      position: absolute;
+      top: -2px; left: -2px; right: -2px; bottom: -2px;
+      border-radius: 50%;
+      border: 2px solid transparent;
+      border-top-color: $jarvis-cian;
+      box-shadow: 0 0 15px $jarvis-cian;
+    }
+
+    &.r1 { 
+      width: 150px; height: 150px; 
+      animation: rotate 8s linear infinite;
+      &::after { animation: rotate 3s linear infinite; }
+    }
+    
+    &.r2 { 
+      width: 200px; height: 200px; 
+      border-style: double;
+      animation: rotate 12s linear infinite reverse;
+      &::after { border-top-color: $jarvis-cian-dark; animation: rotate 5s linear infinite reverse; }
+    }
+    
+    &.r3 { 
+      width: 260px; height: 260px; 
+      border: 1px dashed rgba($jarvis-cian, 0.4);
+      animation: rotate 20s linear infinite;
+      &::after { width: 10px; height: 10px; background: white; top: 50%; border: none; box-shadow: 0 0 20px white; }
+    }
+  }
+
+  .glow {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba($jarvis-cian, 0.15) 0%, rgba($bg-dark, 0) 70%);
+    z-index: -1;
+  }
+}
+
+// 3. TELEMETRÍA INFERIOR 
+.footer-overlay {
+  text-align: center;
+  width: 100%;
+  z-index: 20;
+
+  .telemetry {
+    font-family: monospace;
+    font-size: 0.8rem;
+    color: rgba($jarvis-cian, 0.6);
+    margin-top: 15px;
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+}
+
+// 4. ANIMACIONES DE SISTEMA
+@keyframes floating {
+  0%, 100% { transform: translateY(0px) rotateX(0deg); }
+  50% { transform: translateY(-15px) rotateX(5deg); }
+}
+
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+@keyframes coreSpasm {
+  from { transform: scale(1); box-shadow: 0 0 50px $jarvis-cian; }
+  to { transform: scale(1.1); box-shadow: 0 0 80px white; }
+}

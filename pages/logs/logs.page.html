@@ -1,0 +1,42 @@
+<ion-content class="dark-bg">
+  
+  <div class="header-overlay">
+    <div class="status">PROTOCOLO DE REGISTRO // ACTIVO</div>
+    <h1 class="title">LOGS</h1>
+  </div>
+
+  <div class="logs-container">
+    <div class="empty-state" *ngIf="jarvis.historial.length === 0">
+      ESPERANDO TRANSMISIÓN DE DATOS...
+    </div>
+
+    <div class="log-card" *ngFor="let log of jarvis.historial" [ngClass]="log.tipo">
+      <div class="log-header">
+        <span class="user-tag">{{ log.emisor }}</span>
+        <span class="time-tag">{{ log.hora }}</span>
+      </div>
+      
+      <div class="log-body">
+        <p>{{ log.mensaje }}</p>
+        
+        <div class="log-image-container" *ngIf="log.imagenUrl">
+          <div class="image-wrapper">
+            <img [src]="log.imagenUrl" alt="Archivo visual generado por J.A.R.V.I.S." />
+            <div class="scan-line"></div>
+          </div>
+          <ion-button fill="clear" class="download-btn" (click)="descargarImagen(log.imagenUrl)">
+            <ion-icon name="download-outline" slot="start"></ion-icon>
+            EXTRAER ARCHIVO
+          </ion-button>
+        </div>
+
+      </div>
+
+      <div class="log-footer">
+        <span class="metadata">SYS.LOG // ENCRIPTACIÓN NIVEL 5</span>
+        <ion-icon name="copy-outline" (click)="copiarTexto(log.mensaje)"></ion-icon>
+      </div>
+    </div>
+  </div>
+
+</ion-content>

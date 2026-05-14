@@ -1,3 +1,28 @@
 <ion-app>
-  <ion-router-outlet></ion-router-outlet>
+  <div class="main-wrapper">
+    
+    <div class="content-area">
+      <ion-router-outlet></ion-router-outlet>
+    </div>
+
+    <ion-footer class="ion-no-border">
+      <nav class="jarvis-nav">
+        <div class="nav-button" (click)="navegar('/home')" [class.active-link]="rutaActual === '/home'">
+          <ion-icon name="aperture-outline"></ion-icon>
+          <span>REACTOR</span>
+        </div>
+        
+        <div class="nav-button" (click)="navegar('/logs')" [class.active-link]="rutaActual === '/logs'">
+          <ion-icon name="layers-outline"></ion-icon>
+          <span>LOGS</span>
+        </div>
+
+        <div class="nav-button disabled">
+          <ion-icon name="construct-outline"></ion-icon>
+          <span>ARMOR</span>
+        </div>
+      </nav>
+    </ion-footer>
+
+  </div>
 </ion-app>
